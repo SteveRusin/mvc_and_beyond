@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div class="add-item-wrapper">
+    <input id="add-input" type="text" />
+    <button id="add-btn">Add</button>
+  </div>
+
+  <div id="items-wrapper">
+    {{#list}}
+      {{#isDone}}
+        <input data-toggle-id="{{id}}" type="checkbox" name="checkbox" checked />
+      {{/isDone}}
+      {{^isDone}}
+        <input data-toggle-id="{{id}}" type="checkbox" name="checkbox" />
+      {{/isDone}}
+
+      <span>{{description}}</span>
+      <button class="delete-btn" data-delete-id="{{id}}">Delete</button>
+    {{/list}}
+  </div>
+</div>
