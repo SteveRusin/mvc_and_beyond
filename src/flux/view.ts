@@ -1,38 +1,37 @@
 import template from '../shared/template.html';
 import {
-  getRoot,
   getAddBtn,
   getAddInput,
   getItemsWrapper,
-  List,
-  EventHandlers,
+  getRoot,
 } from '../shared';
 import { render } from 'mustache';
+import { Store } from './store';
+import { dispatcher } from './dispatcher';
+import { AddItemAction, DeleteItemAction, ToggleIsDoneAction } from './actions';
 
 export class View {
-  private _eventHandlers!: EventHandlers;
+  private _store = new Store();
 
-  constructor() {}
+  constructor() {
+    this._store.registerOnStoreUpdate(() => this.render());
+    this.render();
+  }
 
-  render(list: List[]) {
+  render() {
     const html = render(template, {
-      list,
+      list: this._store.get(),
     });
 
     getRoot().innerHTML = html;
-
     this.attachEventHandlers();
-  }
-
-  registerEventHandlers(handlers: EventHandlers) {
-    this._eventHandlers = handlers;
   }
 
   private attachEventHandlers() {
     getAddBtn().addEventListener('click', () => {
       const description = getAddInput().value;
 
-      this._eventHandlers.onAdd(description);
+      dispatcher.dispatch(new AddItemAction(description));
     });
 
     getItemsWrapper().addEventListener('click', (element) => {
@@ -41,13 +40,13 @@ export class View {
       const deleteId = target.dataset.deleteId;
 
       if (deleteId != null) {
-        return this._eventHandlers.onDelete(deleteId);
+        return dispatcher.dispatch(new DeleteItemAction(deleteId));
       }
 
       const toggleId = target.dataset.toggleId;
 
       if (toggleId != null) {
-        return this._eventHandlers.onDoneToggle(toggleId);
+        return dispatcher.dispatch(new ToggleIsDoneAction(toggleId));
       }
     });
   }

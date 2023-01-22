@@ -1,2 +1,4 @@
 //import './mvc';
-import './mvp';
+//import './mvp';
+//import './mvvm';
+import './flux';
