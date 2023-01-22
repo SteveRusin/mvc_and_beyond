@@ -1,7 +1,4 @@
-export interface Action<T = any> {
-  payload: T;
-  type: string;
-}
+import { Action } from '../shared';
 
 export interface IStore {
   onDispatch: (action: Action) => void;

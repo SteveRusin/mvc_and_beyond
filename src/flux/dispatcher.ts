@@ -1,8 +1,9 @@
-import { Action, IStore } from './interfaces';
+import { Action } from '../shared';
+import { IStore } from './interfaces';
 
 let alreadyCreated = false;
 
-export class Dispatcher {
+class Dispatcher {
   private _stores: IStore[] = [];
 
   constructor(){

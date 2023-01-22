@@ -6,7 +6,7 @@ import { dispatcher } from './dispatcher';
 import { Actions, ADD_ITEM, DELETE_ITEM, TOGGLE_IS_DONE } from './actions';
 
 export class Store implements IStore {
-  private _emitModelUpdate!: () => void;
+  private _emitStoreUpdate!: () => void;
 
   private _list: List[] = [EXAMPLE];
 
@@ -50,10 +50,10 @@ export class Store implements IStore {
         throw new Error(`Unknown action: ${action.type}`);
     }
 
-    this._emitModelUpdate();
+    this._emitStoreUpdate();
   }
 
   registerOnStoreUpdate(fn: () => void) {
-    this._emitModelUpdate = fn;
+    this._emitStoreUpdate = fn;
   }
 }
