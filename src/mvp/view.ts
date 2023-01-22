@@ -1,25 +1,15 @@
 import template from '../shared/template.html';
-import {
-  getRoot,
-  getAddBtn,
-  getAddInput,
-  getItemsWrapper,
-  EventHandlers,
-} from '../shared';
+import { getRoot, getAddBtn, getAddInput, getItemsWrapper, List, EventHandlers } from '../shared';
 import { render } from 'mustache';
-
-import { Model } from './model';
 
 export class View {
   private _eventHandlers!: EventHandlers;
 
-  constructor(private _model: Model) {
-    this._model.registerOnModelUpdate(this.render.bind(this));
-  }
+  constructor() {}
 
-  render() {
+  render(list: List[]) {
     const html = render(template, {
-      list: this._model.get(),
+      list,
     });
 
     getRoot().innerHTML = html;

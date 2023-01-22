@@ -1,1 +1,2 @@
-import './mvc';
+//import './mvc';
+import './mvp';
