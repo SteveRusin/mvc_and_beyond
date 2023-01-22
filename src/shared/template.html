@@ -7,13 +7,13 @@
   <div id="items-wrapper">
     {{#list}}
       {{#isDone}}
-        <input data-toggle-id="{{id}}" type="checkbox" name="checkbox" checked />
+        <input id="toggle-{{id}}" data-toggle-id="{{id}}" type="checkbox" name="checkbox" checked />
       {{/isDone}}
       {{^isDone}}
-        <input data-toggle-id="{{id}}" type="checkbox" name="checkbox" />
+        <input id="toggle-{{id}}" data-toggle-id="{{id}}" type="checkbox" name="checkbox" />
       {{/isDone}}
 
-      <span>{{description}}</span>
+      <label for="toggle-{{id}}" class="description">{{description}}</label>
       <button class="delete-btn" data-delete-id="{{id}}">Delete</button>
     {{/list}}
   </div>
