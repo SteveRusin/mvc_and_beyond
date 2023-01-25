@@ -1,4 +1,3 @@
-import template from '../shared/template.html';
 import {
   getRoot,
   getAddBtn,
@@ -6,6 +5,7 @@ import {
   getItemsWrapper,
   List,
   EventHandlers,
+  template,
 } from '../shared';
 import { render } from 'mustache';
 

@@ -1,9 +1,9 @@
-import template from '../shared/template.html';
 import {
   getAddBtn,
   getAddInput,
   getItemsWrapper,
   getRoot,
+  template,
 } from '../shared';
 import { render } from 'mustache';
 import { Store } from './store';

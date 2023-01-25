@@ -1,7 +1,12 @@
 import { render } from 'mustache';
 
-import template from '../shared/template.html';
-import { getAddBtn, getAddInput, getItemsWrapper, getRoot } from '../shared';
+import {
+  getAddBtn,
+  getAddInput,
+  getItemsWrapper,
+  getRoot,
+  template,
+} from '../shared';
 import { AddItemAction, DeleteItemAction, ToggleIsDoneAction } from './actions';
 import { store } from './store';
 
