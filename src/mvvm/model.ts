@@ -18,10 +18,14 @@ export class Model {
         isDone: false,
       },
     ];
+
+    return this._list;
   }
 
   remove(id: string) {
     this._list = this._list.filter((item) => item.id !== id);
+
+    return this._list;
   }
 
   toggleDone(id: string) {
@@ -33,5 +37,7 @@ export class Model {
           }
         : item
     );
+
+    return this._list;
   }
 }

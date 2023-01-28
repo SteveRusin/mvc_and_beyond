@@ -55,7 +55,6 @@ function applyPropertyBindings(viewModel: any) {
   });
 }
 
-// todo use event delegation
 function parseEventBindings() {
   const bindedElements = document.querySelectorAll<HTMLElement>('[data-on]');
 
@@ -99,32 +98,69 @@ function parseLoopsBindings() {
 function applyLoopsBindings(viewModel: any) {
   const elementsWithMetadata = parseLoopsBindings();
 
-  elementsWithMetadata.forEach(({ element, VMProp }) => {
-    const templateParent = element.parentElement!;
-
-    // todo redraw when prop changes
-    for (const loopItem of viewModel[VMProp]) {
-      const cloned = element.content.cloneNode(true);
-      templateParent.appendChild(cloned);
-    }
-    const elementsToBindProps = findElementsByRegex('{.*}', templateParent);
-    // todo replace bindings
+  elementsWithMetadata.forEach(({ VMProp, element }) => {
+    let originalValue = viewModel[VMProp];
+    Object.defineProperty(viewModel, VMProp, {
+      get: function () {
+        console.log('Getter called');
+        return originalValue;
+      },
+      set: function (value) {
+        console.log('Setter called');
+        originalValue = value;
+        applyLoopTemplateBindings(viewModel, elementsWithMetadata);
+      },
+    });
   });
+
+  applyLoopTemplateBindings(viewModel, elementsWithMetadata);
 }
 
-function findElementsByRegex(regexString: string, node: HTMLElement) {
-  var elArray = [];
-  var tmp = node.querySelectorAll('*');
-
-  var regex = new RegExp(regexString);
-  for (var i = 0; i < tmp.length; i++) {
-    if (
-      !(tmp[i] instanceof HTMLTemplateElement) &&
-      regex.test(tmp[i].outerHTML)
-    ) {
-      elArray.push(tmp[i]);
+function applyLoopTemplateBindings(
+  viewModel: any,
+  elementsWithMetadata: ParsedLoopTemplate[]
+) {
+  elementsWithMetadata.forEach(({ element, VMProp }) => {
+    const templateParent = element.parentElement!;
+    while (templateParent.children.length > 1) {
+      templateParent.removeChild(templateParent.children[1]);
     }
-  }
+    const iterable: any[] = viewModel[VMProp];
 
-  return elArray;
+    for (const loopItem of iterable) {
+      const clonedTemplate = element.content.cloneNode(
+        true
+      ) as DocumentFragment;
+      const clonedElements = [...clonedTemplate.children] as HTMLElement[];
+      templateParent.appendChild(clonedTemplate);
+
+      clonedElements.forEach((clonedElement) => {
+        const newHtml = clonedElement.outerHTML.replaceAll(
+          /{.*?}/g,
+          (match) => {
+            const key = match.substring(1, match.length - 1);
+            return loopItem[key];
+          }
+        );
+
+        if (newHtml !== clonedElement.outerHTML) {
+          clonedElement.outerHTML = newHtml;
+        }
+
+        const eventBinding = clonedElement.dataset.on
+          ?.split(':')
+          .map((s) => s.trim());
+
+        if (!eventBinding) {
+          return;
+        }
+
+        const [eventTrigger, VMHandler] = eventBinding;
+
+        clonedElement.addEventListener(eventTrigger, () =>
+          viewModel[VMHandler](loopItem)
+        );
+      });
+    }
+  });
 }

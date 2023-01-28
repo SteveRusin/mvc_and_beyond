@@ -4,6 +4,7 @@
     "target": "ES2022",
     "module": "commonjs",
     "moduleResolution": "Node",
+    "lib": ["DOM", "ES2022", "DOM.Iterable"],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,

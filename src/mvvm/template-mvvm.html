@@ -6,21 +6,8 @@
 
   <div id="items-wrapper">
     <template data-forEach="list">
-      <span class="{description}">{description}</span>
+      <label for="toggle-{id}" class="description">{description}</label>
+      <button class="delete-btn" data-on="click : onDelete">Delete</button>
     </template>
   </div>
 </div>
-
-<!-- <div id="items-wrapper">
-  {{#list}}
-    {{#isDone}}
-      <input id="toggle-{{id}}" data-toggle-id="{{id}}" type="checkbox" name="checkbox" checked />
-    {{/isDone}}
-    {{^isDone}}
-      <input id="toggle-{{id}}" data-toggle-id="{{id}}" type="checkbox" name="checkbox" />
-    {{/isDone}}
-
-    <label for="toggle-{{id}}" class="description">{{description}}</label>
-    <button class="delete-btn" data-delete-id="{{id}}">Delete</button>
-  {{/list}}
-</div> -->

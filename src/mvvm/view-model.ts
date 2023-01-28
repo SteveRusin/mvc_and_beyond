@@ -1,3 +1,4 @@
+import { List } from '../shared';
 import { Model } from './model';
 
 export class ViewModel {
@@ -8,13 +9,12 @@ export class ViewModel {
   newItemValue = `it's initial value for binding`;
 
 
-  constructor() {
-    (window as any).log = () => console.log(this);
+  onAdd() {
+    this.list = this._model.add(this.newItemValue);
+    this.newItemValue = '';
   }
 
-  onAdd() {
-    this._model.add(this.newItemValue);
-    this.newItemValue = '';
-    this.list = this._model.getList();
+  onDelete(item: List) {
+    this.list = this._model.remove(item.id);
   }
 }
