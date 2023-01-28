@@ -10,7 +10,6 @@ export const reducer: ReducerFn = (state, action) => {
         {
           id: v4(),
           description: action.payload,
-          isDone: false,
         },
       ];
     case DELETE_ITEM:

@@ -26,7 +26,6 @@ export class Store implements IStore {
           {
             id: v4(),
             description: action.payload,
-            isDone: false,
           },
         ];
 

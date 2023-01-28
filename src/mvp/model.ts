@@ -17,7 +17,6 @@ export class Model {
       {
         id: v4(),
         description,
-        isDone: false,
       },
     ];
 
