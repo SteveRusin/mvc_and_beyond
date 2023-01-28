@@ -37,11 +37,9 @@ function applyPropertyBindings(viewModel: any) {
 
     Object.defineProperty(viewModel, VMprop, {
       get: function () {
-        console.log('Getter called');
         return element[ElProp];
       },
       set: function (value) {
-        console.log('Setter called');
         (element as any)[ElProp] = value;
       },
     });
@@ -98,15 +96,13 @@ function parseLoopsBindings() {
 function applyLoopsBindings(viewModel: any) {
   const elementsWithMetadata = parseLoopsBindings();
 
-  elementsWithMetadata.forEach(({ VMProp, element }) => {
+  elementsWithMetadata.forEach(({ VMProp }) => {
     let originalValue = viewModel[VMProp];
     Object.defineProperty(viewModel, VMProp, {
       get: function () {
-        console.log('Getter called');
         return originalValue;
       },
       set: function (value) {
-        console.log('Setter called');
         originalValue = value;
         applyLoopTemplateBindings(viewModel, elementsWithMetadata);
       },
