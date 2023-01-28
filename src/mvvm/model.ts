@@ -27,17 +27,4 @@ export class Model {
 
     return this._list;
   }
-
-  toggleDone(id: string) {
-    this._list = this._list.map((item) =>
-      item.id === id
-        ? {
-            ...item,
-            isDone: !item.isDone,
-          }
-        : item
-    );
-
-    return this._list;
-  }
 }

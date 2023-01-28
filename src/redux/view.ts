@@ -7,7 +7,7 @@ import {
   getRoot,
   template,
 } from '../shared';
-import { AddItemAction, DeleteItemAction, ToggleIsDoneAction } from './actions';
+import { AddItemAction, DeleteItemAction } from './actions';
 import { store } from './store';
 
 export class View {
@@ -39,12 +39,6 @@ export class View {
 
       if (deleteId != null) {
         return store.dispatch(new DeleteItemAction(deleteId));
-      }
-
-      const toggleId = target.dataset.toggleId;
-
-      if (toggleId != null) {
-        return store.dispatch(new ToggleIsDoneAction(toggleId));
       }
     });
   }

@@ -6,10 +6,8 @@ export interface List {
 
 export type OnAddFn = (description: string) => void;
 export type OnDeleteFn = (id: string) => void;
-export type OnDoneToggleFn = (id: string) => void;
 
 export interface EventHandlers {
   onAdd: OnAddFn;
   onDelete: OnDeleteFn;
-  onDoneToggle: OnDoneToggleFn;
 }

@@ -9,7 +9,6 @@ export class Controller {
     this._view.registerEventHandlers({
       onAdd: (description) => this._model.add(description),
       onDelete: (id) => this._model.remove(id),
-      onDoneToggle: (id) => this._model.toggleDone(id),
     });
 
     this._view.render();

@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { ADD_ITEM, DELETE_ITEM, TOGGLE_IS_DONE } from './actions';
+import { ADD_ITEM, DELETE_ITEM } from './actions';
 import { ReducerFn } from './interfaces';
 
 export const reducer: ReducerFn = (state, action) => {
@@ -15,15 +15,6 @@ export const reducer: ReducerFn = (state, action) => {
       ];
     case DELETE_ITEM:
       return state.filter((item) => item.id !== action.payload);
-    case TOGGLE_IS_DONE:
-      return state.map((item) =>
-        item.id === action.payload
-          ? {
-              ...item,
-              isDone: !item.isDone,
-            }
-          : item
-      );
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }

@@ -8,7 +8,7 @@ import {
 import { render } from 'mustache';
 import { Store } from './store';
 import { dispatcher } from './dispatcher';
-import { AddItemAction, DeleteItemAction, ToggleIsDoneAction } from './actions';
+import { AddItemAction, DeleteItemAction } from './actions';
 
 export class View {
   private _store = new Store();
@@ -41,12 +41,6 @@ export class View {
 
       if (deleteId != null) {
         return dispatcher.dispatch(new DeleteItemAction(deleteId));
-      }
-
-      const toggleId = target.dataset.toggleId;
-
-      if (toggleId != null) {
-        return dispatcher.dispatch(new ToggleIsDoneAction(toggleId));
       }
     });
   }

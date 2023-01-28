@@ -30,19 +30,6 @@ export class Model {
     this._emitModelUpdate();
   }
 
-  toggleDone(id: string) {
-    this._list = this._list.map((item) =>
-      item.id === id
-        ? {
-            ...item,
-            isDone: !item.isDone,
-          }
-        : item
-    );
-
-    this._emitModelUpdate();
-  }
-
   registerOnModelUpdate(fn: () => void) {
     this._emitModelUpdate = fn;
   }
