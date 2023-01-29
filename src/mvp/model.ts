@@ -3,8 +3,6 @@ import { v4 } from 'uuid';
 import { List, EXAMPLE } from '../shared';
 
 export class Model {
-  private _emitModelUpdate!: () => void;
-
   private _list: List[] = [EXAMPLE];
 
   getList() {
@@ -19,17 +17,9 @@ export class Model {
         description,
       },
     ];
-
-    this._emitModelUpdate();
   }
 
   remove(id: string) {
     this._list = this._list.filter((item) => item.id !== id);
-
-    this._emitModelUpdate();
-  }
-
-  registerOnModelUpdate(fn: () => void) {
-    this._emitModelUpdate = fn;
   }
 }

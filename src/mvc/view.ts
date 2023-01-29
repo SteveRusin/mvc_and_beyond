@@ -19,7 +19,7 @@ export class View {
 
   render() {
     const html = render(template, {
-      list: this._model.get(),
+      list: this._model.getList(),
     });
 
     getRoot().innerHTML = html;

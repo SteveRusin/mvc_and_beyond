@@ -7,11 +7,15 @@ export class Presenter {
 
   constructor() {
     this._view.registerEventHandlers({
-      onAdd: (description) => this._model.add(description),
-      onDelete: (id) => this._model.remove(id),
+      onAdd: (description) => {
+        this._model.add(description);
+        this.renderView();
+      },
+      onDelete: (id) => {
+        this._model.remove(id);
+        this.renderView();
+      },
     });
-
-    this._model.registerOnModelUpdate(() => this.renderView());
 
     this.renderView();
   }

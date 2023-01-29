@@ -3,7 +3,7 @@ import { ViewModel } from './view-model';
 
 import { bindTemplate } from './utils';
 
-const view = new View();
+new View();
 const viewModel = new ViewModel();
 
 bindTemplate(viewModel);

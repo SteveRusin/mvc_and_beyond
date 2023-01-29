@@ -9,6 +9,7 @@ import {
 } from '../shared';
 import { render } from 'mustache';
 
+
 export class View {
   private _eventHandlers!: EventHandlers;
 

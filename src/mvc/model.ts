@@ -7,7 +7,7 @@ export class Model {
 
   private _list: List[] = [EXAMPLE];
 
-  get() {
+  getList() {
     return this._list;
   }
 

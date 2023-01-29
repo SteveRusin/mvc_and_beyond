@@ -14,7 +14,7 @@ export class Store implements IStore {
     dispatcher.registerStore(this);
   }
 
-  get() {
+  getList() {
     return this._list;
   }
 
