@@ -9,7 +9,6 @@ import {
 } from '../shared';
 import { render } from 'mustache';
 
-
 export class View {
   private _eventHandlers!: EventHandlers;
 
@@ -42,7 +41,7 @@ export class View {
       const deleteId = target.dataset.deleteId;
 
       if (deleteId != null) {
-        return this._eventHandlers.onDelete(deleteId);
+        this._eventHandlers.onDelete(deleteId);
       }
     });
   }

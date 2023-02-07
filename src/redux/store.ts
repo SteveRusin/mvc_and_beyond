@@ -7,18 +7,16 @@ let alreadyCreated = false;
 class Store {
   private _reducers: ReducerFn[] = [];
   private _emitStoreUpdateFns: Array<() => void> = [];
-
   private _list: List[] = [EXAMPLE];
 
   constructor() {
     if (alreadyCreated) {
-      throw new Error('Dispatcher should be a singleton');
+      throw new Error('Store should be a singleton');
     }
-
     alreadyCreated = true;
   }
 
-  get() {
+  getAll() {
     return this._list;
   }
 
@@ -39,6 +37,5 @@ class Store {
     this._reducers.push(fn);
   }
 }
-
 
 export const store = new Store();

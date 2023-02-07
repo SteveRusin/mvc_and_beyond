@@ -18,7 +18,7 @@ export class View {
 
   render() {
     const html = render(template, {
-      list: store.get(),
+      list: store.getAll(),
     });
 
     getRoot().innerHTML = html;
@@ -38,7 +38,7 @@ export class View {
       const deleteId = target.dataset.deleteId;
 
       if (deleteId != null) {
-        return store.dispatch(new DeleteItemAction(deleteId));
+        store.dispatch(new DeleteItemAction(deleteId));
       }
     });
   }

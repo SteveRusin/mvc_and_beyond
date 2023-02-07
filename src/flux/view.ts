@@ -40,7 +40,7 @@ export class View {
       const deleteId = target.dataset.deleteId;
 
       if (deleteId != null) {
-        return dispatcher.dispatch(new DeleteItemAction(deleteId));
+        dispatcher.dispatch(new DeleteItemAction(deleteId));
       }
     });
   }

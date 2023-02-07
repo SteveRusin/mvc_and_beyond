@@ -14,7 +14,7 @@ export class View {
   private _eventHandlers!: EventHandlers;
 
   constructor(private _model: Model) {
-    this._model.registerOnModelUpdate(this.render.bind(this));
+    this._model.registerOnModelUpdate(() => this.render());
   }
 
   render() {
@@ -44,7 +44,7 @@ export class View {
       const deleteId = target.dataset.deleteId;
 
       if (deleteId != null) {
-        return this._eventHandlers.onDelete(deleteId);
+        this._eventHandlers.onDelete(deleteId);
       }
     });
   }
