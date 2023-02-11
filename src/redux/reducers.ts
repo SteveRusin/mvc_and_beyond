@@ -15,6 +15,6 @@ export const reducer: ReducerFn = (state, action) => {
     case DELETE_ITEM:
       return state.filter((item) => item.id !== action.payload);
     default:
-      throw new Error(`Unknown action: ${action.type}`);
+      return state;
   }
 };

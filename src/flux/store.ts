@@ -34,8 +34,6 @@ export class Store implements IStore {
         this._list = this._list.filter((item) => item.id !== action.payload);
 
         break;
-      default:
-        throw new Error(`Unknown action: ${action.type}`);
     }
 
     this._emitStoreUpdate();
